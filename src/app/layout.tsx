@@ -1,0 +1,50 @@
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import NotificationInitializer from "../components/NotificationInitializer"
+import { AuthProvider } from "../context/AuthContext";
+import { LanguageProvider } from "../context/LanguageContext";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "X Clone - Social Media Platform",
+  description: "A modern Twitter clone built with Next.js",
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <head>
+        {/* Razorpay Script */}
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+      </head>
+
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <AuthProvider>
+          <LanguageProvider>
+            <NotificationInitializer />
+            {children}
+          </LanguageProvider>
+        </AuthProvider>
+      </body>
+    </html>
+  );
+}
