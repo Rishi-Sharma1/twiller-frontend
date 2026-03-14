@@ -313,7 +313,7 @@ export const AuthProvider: React.FC<{
 
     localStorage.removeItem("twitter-user");
     
-    router.push("/login");
+    router.push("/");
   };
 
   /* ========== Update Profile ========== */
